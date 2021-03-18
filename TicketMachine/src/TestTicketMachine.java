@@ -66,8 +66,7 @@ public class TestTicketMachine {
             System.out.println("Ticket Price is " + getPrice() + " for one ticket.");
             if (balance < price) {
                 do {
-                    System.out.println("You must insert at least: " +
-                            (price - balance) + " more cents.");
+                    System.out.println("You must insert at least: " + (price - balance) + " more cents.");
                     insertMoney();
                 } while (balance < price);
             }
@@ -85,9 +84,14 @@ public class TestTicketMachine {
             System.out.println("Which price: 1. 199 2. 99");
             int choice = keyboard.nextInt();
             switch (choice) {
-                case 1 -> ticketCost = 199;
-                case 2 -> ticketCost = 99;
-                default -> System.out.println("Please try again");
+            case 1:
+                ticketCost = 199;
+                break;
+            case 2:
+                ticketCost = 99;
+                break;
+            default:
+                System.out.println("Please try again");
             }
             return ticketCost;
         }
@@ -124,8 +128,7 @@ public class TestTicketMachine {
         }
 
         /**
-         * get the amount of all type of coins
-         * and print it out
+         * get the amount of all type of coins and print it out
          */
         public void getMachineInfo() {
             System.out.println("total in machine: " + total);
@@ -143,8 +146,7 @@ public class TestTicketMachine {
         }
 
         /**
-         * Return The amount of money already inserted for the
-         * next ticket.
+         * Return The amount of money already inserted for the next ticket.
          */
         public int getBalance() {
             return balance;
@@ -165,8 +167,8 @@ public class TestTicketMachine {
         }
 
         /**
-         * Receive an amount of money in cents from a customer.
-         * Check that the amount is sensible.
+         * Receive an amount of money in cents from a customer. Check that the amount is
+         * sensible.
          */
         public void insertMoney() {
             System.out.println("Please insert money!");
@@ -180,8 +182,7 @@ public class TestTicketMachine {
         }
 
         /**
-         * Print a ticket, and
-         * reduce the current balance by the ticket price.
+         * Print a ticket, and reduce the current balance by the ticket price.
          */
         public void printTicket() {
             // Simulate the printing of a ticket.
