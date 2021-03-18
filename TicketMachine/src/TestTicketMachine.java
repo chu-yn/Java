@@ -76,20 +76,18 @@ public class TestTicketMachine {
 
         /**
          * method of choosing price of ticket
+         *
          * @return price of ticket
          */
         public int choiceTicket() {
             int ticketCost = 0;
             System.out.println("Which price: 1. 199 2. 99");
             int choice = keyboard.nextInt();
-            switch (choice) {
-            case 1:
+            if (choice == 1) {
                 ticketCost = 199;
-                break;
-            case 2:
+            } else if (choice == 2) {
                 ticketCost = 99;
-                break;
-            default:
+            } else {
                 System.out.println("Please try again");
             }
             return ticketCost;
@@ -130,11 +128,14 @@ public class TestTicketMachine {
          * get the amount of all type of coins and print it out
          */
         public void getMachineInfo() {
+            System.out.println("System info");
+            System.out.println("#######################");
             System.out.println("total in machine: " + total);
             System.out.println("Amount of fifty coin: " + fiftyCoin);
             System.out.println("Amount of ten coin: " + tenCoin);
             System.out.println("Amount of five coin: " + fiveCoin);
             System.out.println("Amount of one coin: " + oneCoin);
+            System.out.println("#######################");
         }
 
         /**
@@ -178,6 +179,7 @@ public class TestTicketMachine {
             if (amount > 0) {
                 balance = balance + amount;
                 getCoin(amount);
+                System.out.println("Balance has been inserted: " + getBalance());
             } else {
                 System.out.println("Use a positive amount: " + amount);
             }
@@ -188,7 +190,7 @@ public class TestTicketMachine {
          */
         public void printTicket() {
             // Simulate the printing of a ticket.
-            System.out.println("##################");
+            System.out.println("\n##################");
             System.out.println("# The BlueJ Line");
             System.out.println("# Ticket");
             System.out.println("# " + price + " cents.");
