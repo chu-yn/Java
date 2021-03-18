@@ -76,7 +76,6 @@ public class TestTicketMachine {
 
         /**
          * method of choosing price of ticket
-         *
          * @return price of ticket
          */
         public int choiceTicket() {
@@ -132,10 +131,10 @@ public class TestTicketMachine {
          */
         public void getMachineInfo() {
             System.out.println("total in machine: " + total);
-            System.out.println("fifty coin: " + fiftyCoin);
-            System.out.println("ten coin: " + tenCoin);
-            System.out.println("five coin: " + fiveCoin);
-            System.out.println("one coin: " + oneCoin);
+            System.out.println("Amount of fifty coin: " + fiftyCoin);
+            System.out.println("Amount of ten coin: " + tenCoin);
+            System.out.println("Amount of five coin: " + fiveCoin);
+            System.out.println("Amount of one coin: " + oneCoin);
         }
 
         /**
@@ -152,6 +151,9 @@ public class TestTicketMachine {
             return balance;
         }
 
+        /**
+         * get amount of coins which inserted by user
+         */
         public void getCoin(int amount) {
             int quarters = amount / 50;
             fiftyCoin += quarters;
