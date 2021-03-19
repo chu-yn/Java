@@ -43,7 +43,7 @@ public class TestTicketMachine {
             boolean toContinue = true;
             while (toContinue) {
                 while (ticketCost <= 0) {
-                    ticketCost = choiceTicket();
+                    ticketCost = ticketChoose(199, 99);
                 }
                 buyProcess(ticketCost);
                 System.out.println("Continue or not (y/n):");
@@ -79,14 +79,14 @@ public class TestTicketMachine {
          *
          * @return price of ticket
          */
-        public int choiceTicket() {
+        public int ticketChoose(int ticket1, int ticket2) {
             int ticketCost = 0;
-            System.out.println("Which price: 1. 199 2. 99");
+            System.out.println("Which price: 1. " + ticket1 + " 2. " + ticket2);
             int choice = keyboard.nextInt();
             if (choice == 1) {
-                ticketCost = 199;
+                ticketCost = ticket1;
             } else if (choice == 2) {
-                ticketCost = 99;
+                ticketCost = ticket2;
             } else {
                 System.out.println("Please try again");
             }
