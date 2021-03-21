@@ -30,9 +30,6 @@ public class TestTicketMachine {
             balance = 0;
             // get initial total in machine
             total = fiftyCoin * 50 + tenCoin * 10 + fiveCoin * 5 + oneCoin;
-            getMachineInfo();
-            machineProcess();
-            getMachineInfo();
         }
 
         /**
@@ -45,7 +42,7 @@ public class TestTicketMachine {
                 while (ticketCost <= 0) {
                     ticketCost = ticketChoose(199, 99);
                 }
-                buyProcess(ticketCost);
+                buyProcess();
                 System.out.println("Continue or not (y/n):");
                 char goOn = keyboard.next().charAt(0);
                 if (goOn == 'Y' || goOn == 'y') {
@@ -61,8 +58,7 @@ public class TestTicketMachine {
         /**
          * method of buying ticket process
          */
-        public void buyProcess(int ticketCost) {
-            price = ticketCost;
+        public void buyProcess() {
             System.out.println("Ticket Price is " + getPrice() + " for one ticket.");
             if (balance < price) {
                 do {
@@ -76,8 +72,7 @@ public class TestTicketMachine {
 
         /**
          * method of choosing price of ticket
-         *
-         * @return price of ticket
+         * provide price of ticket
          */
         public int ticketChoose(int ticket1, int ticket2) {
             int ticketCost = 0;
@@ -90,6 +85,7 @@ public class TestTicketMachine {
             } else {
                 System.out.println("Please try again");
             }
+            price = ticketCost;
             return ticketCost;
         }
 
@@ -206,6 +202,30 @@ public class TestTicketMachine {
     public static void main(String[] args) {
         TestTicketMachine testTicketMachine = new TestTicketMachine();
         TestTicketMachine.TicketMachine ticketMachine = testTicketMachine.new TicketMachine();
+        System.out.println("Test get Machine info:");
+        System.out.println("#######################");
+        ticketMachine.getMachineInfo();
+        System.out.println("\nTest ticketChoose() method:");
+        System.out.println("#######################");
+        ticketMachine.ticketChoose(99, 199);
+        System.out.println("\nTest getPrice() method:");
+        System.out.println("#######################");
+        System.out.println(ticketMachine.getPrice());
+        System.out.println("\nTest buyProcess() method:");
+        System.out.println("#######################");
+        ticketMachine.buyProcess();
+        System.out.println("\nTest insertMoney() method:");
+        System.out.println("#######################");
+        ticketMachine.insertMoney();
+        System.out.println("\nTest getBalance() method:");
+        System.out.println("#######################");
+        System.out.println(ticketMachine.getBalance());
+        System.out.println("\nTest getBalance() method:");
+        System.out.println("#######################");
+        System.out.println(ticketMachine.refundBalance());
+        System.out.println("\nTest full machine process:");
+        System.out.println("#######################");
+        ticketMachine.machineProcess();
         System.exit(0);
     }
 }
