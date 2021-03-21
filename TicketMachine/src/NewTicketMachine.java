@@ -30,22 +30,19 @@ public class NewTicketMachine {
             balance = 0;
             // get initial total in machine
             total = fiftyCoin * 50 + tenCoin * 10 + fiveCoin * 5 + oneCoin;
-            getMachineInfo();
-            machineProcess();
-            getMachineInfo();
         }
 
         /**
          * method of TicketMachine process
          */
-        public void machineProcess() {
+        public void machineProcess(int ticket1, int ticket2) {
             int ticketCost = 0;
             boolean toContinue = true;
             while (toContinue) {
                 while (ticketCost <= 0) {
-                    ticketCost = ticketChoose(199, 99);
+                    ticketCost = ticketChoose(ticket1, ticket2);
                 }
-                buyProcess(ticketCost);
+                buyProcess();
                 System.out.println("Continue or not (y/n):");
                 char goOn = keyboard.next().charAt(0);
                 if (goOn == 'Y' || goOn == 'y') {
@@ -61,8 +58,7 @@ public class NewTicketMachine {
         /**
          * method of buying ticket process
          */
-        public void buyProcess(int ticketCost) {
-            price = ticketCost;
+        public void buyProcess() {
             System.out.println("Ticket Price is " + getPrice() + " for one ticket.");
             if (balance < price) {
                 do {
@@ -90,6 +86,7 @@ public class NewTicketMachine {
             } else {
                 System.out.println("Please try again");
             }
+            price = ticketCost;
             return ticketCost;
         }
 
@@ -200,12 +197,14 @@ public class NewTicketMachine {
             // Reduce the balance by the price.
             balance = balance - price;
         }
-
     }
 
     public static void main(String[] args) {
-        TestTicketMachine testTicketMachine = new TestTicketMachine();
-        TestTicketMachine.TicketMachine ticketMachine = testTicketMachine.new TicketMachine();
+        NewTicketMachine newTicketMachine = new NewTicketMachine();
+        NewTicketMachine.TicketMachine ticketMachine = newTicketMachine.new TicketMachine();
+        ticketMachine.getMachineInfo();
+        ticketMachine.machineProcess(199, 119);
+        ticketMachine.getMachineInfo();
         System.exit(0);
     }
 }

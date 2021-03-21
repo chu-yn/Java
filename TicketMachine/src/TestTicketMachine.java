@@ -35,12 +35,12 @@ public class TestTicketMachine {
         /**
          * method of TicketMachine process
          */
-        public void machineProcess() {
+        public void machineProcess(int ticket1, int ticket2) {
             int ticketCost = 0;
             boolean toContinue = true;
             while (toContinue) {
                 while (ticketCost <= 0) {
-                    ticketCost = ticketChoose(199, 99);
+                    ticketCost = ticketChoose(ticket1, ticket2);
                 }
                 buyProcess();
                 System.out.println("Continue or not (y/n):");
@@ -225,7 +225,7 @@ public class TestTicketMachine {
         System.out.println(ticketMachine.refundBalance());
         System.out.println("\nTest full machine process:");
         System.out.println("#######################");
-        ticketMachine.machineProcess();
+        ticketMachine.machineProcess(109, 189);
         System.exit(0);
     }
 }
