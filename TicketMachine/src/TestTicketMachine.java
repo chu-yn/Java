@@ -16,7 +16,7 @@ public class TestTicketMachine {
         private int total;
         // The amount of 50 coin in machine
         private int fiftyCoin = 10;
-        // The amount of 10 coin in machine
+        // The amount of 10 coin in machinep
         private int tenCoin = 10;
         // The amount of 5 coin in machine
         private int fiveCoin = 10;
