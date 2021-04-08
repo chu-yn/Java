@@ -71,11 +71,11 @@ public class Item {
      */
     public void print() {
         System.out.print("title: " + title + " (" + playingTime + " mins)");
-        if (gotIt) {
+        if (getOwn()) {
             System.out.println("*");
         } else {
             System.out.println();
         }
-        System.out.println("    " + comment);
+        System.out.println("    " + getComment());
     }
 }
