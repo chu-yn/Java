@@ -1,4 +1,4 @@
-public class TestDome {
+public class TestDemo {
     public static void main(String[] args) {
         // create object database from Database
         Database database = new Database();
