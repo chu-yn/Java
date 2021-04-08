@@ -44,4 +44,13 @@ public class CD extends Item {
         System.out.println("Title: " + getTitle());
         System.out.println("Track: " + getNumberOfTracks());
     }
+
+    /**
+     * add new print of Artist
+     */
+    @Override
+    public void print() {
+        super.print();
+        System.out.println("Artist: " + getArtist());
+    }
 }

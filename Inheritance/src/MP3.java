@@ -36,4 +36,12 @@ public class MP3 extends Item {
         System.out.println("Track: " + getNumberOfTracks());
     }
 
+    /**
+     * add new print of Artist
+     */
+    @Override
+    public void print() {
+        super.print();
+        System.out.println("Artist: "+getArtist());
+    }
 }
