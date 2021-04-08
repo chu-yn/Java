@@ -1,3 +1,7 @@
+/**
+ * @author 0086C047 潘俊言
+ * @version 1.0
+ */
 public class MP3 extends Item {
     /**
      * Initialise the fields of the item.
@@ -42,6 +46,6 @@ public class MP3 extends Item {
     @Override
     public void print() {
         super.print();
-        System.out.println("Artist: "+getArtist());
+        System.out.println("Artist: " + getArtist());
     }
 }

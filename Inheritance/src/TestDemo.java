@@ -1,3 +1,7 @@
+/**
+ * @author 0086C047 潘俊言
+ * @version 1.0
+ */
 public class TestDemo {
     public static void main(String[] args) {
         // create object database from Database
