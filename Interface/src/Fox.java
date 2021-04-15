@@ -33,6 +33,8 @@ public class Fox extends Animal
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
 
+    private boolean isFemale;
+
     /**
      * Create a fox. A fox can be created as a new born (age zero
      * and not hungry) or with a random age and food level.
@@ -47,10 +49,12 @@ public class Fox extends Animal
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
+            isFemale = rand.nextBoolean();
         }
         else {
             age = 0;
             foodLevel = RABBIT_FOOD_VALUE;
+            isFemale = true;
         }
     }
     
@@ -160,7 +164,7 @@ public class Fox extends Animal
     private int breed()
     {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY && isFemale) {
             births = rand.nextInt(MAX_LITTER_SIZE) + 1;
         }
         return births;

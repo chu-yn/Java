@@ -4,16 +4,16 @@ import java.util.Random;
 
 public class Wolf extends Animal {
     // The age at which a wolf can start to breed.
-    private static final int BREEDING_AGE = 15;
+    private static final int BREEDING_AGE = 7;
     // The age to which a wolf can live.
     private static final int MAX_AGE = 200;
     // The likelihood of a wolf breeding.
-    private static final double BREEDING_PROBABILITY = 0.5;
+    private static final double BREEDING_PROBABILITY = 0.7;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 4;
+    private static final int MAX_LITTER_SIZE = 6;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
-    private static final int FOX_FOOD_VALUE = 5;
+    private static final int FOX_FOOD_VALUE = 10;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
 
@@ -24,16 +24,20 @@ public class Wolf extends Animal {
 
     private int foodLevel;
 
+    private boolean isFemale;
+
     public Wolf(boolean randomAge, Field field, Location location)
     {
         super(field, location);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(FOX_FOOD_VALUE);
+            isFemale = rand.nextBoolean();
         }
         else {
             age = 0;
             foodLevel = FOX_FOOD_VALUE;
+            isFemale = true;
         }
     }
 
@@ -115,7 +119,7 @@ public class Wolf extends Animal {
     private int breed()
     {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY && isFemale) {
             births = rand.nextInt(MAX_LITTER_SIZE) + 1;
         }
         return births;

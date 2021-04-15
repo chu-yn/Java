@@ -86,13 +86,12 @@ public class Simulator
     public void simulate(int numSteps) {
         for(int step = 1; step <= numSteps && view.isViable(field); step++) {
             simulateOneStep();
-            // wait 0.25s
+            // wait 0.1s
             try {
-                Thread.currentThread().sleep(250);
+                Thread.currentThread().sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
     }
     
