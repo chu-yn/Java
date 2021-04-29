@@ -12,15 +12,17 @@ public class GpsAnalyze {
             BufferedReader reader =
                     new BufferedReader(new FileReader("src/NMEA_GPS.txt"));
             FileWriter writer = new FileWriter("./location.csv");
+            ArrayList<String> location = new ArrayList<>();
             String line = reader.readLine();
             while (line != null) {
                 if (line.matches("(.*)GPGGA(.*)")) {
                     String[] tokens = line.split(",");
-                    ArrayList<String> location = new ArrayList<>();
                     location.add(tokens[2]);
                     location.add(tokens[4]);
                     location.set(0, Transform.latitudeTrans(location.get(0)));
                     location.set(1, Transform.longitudeTrans(location.get(1)));
+                }
+                if (!location.isEmpty()) {
                     for (int i = 0; i <= 1; i++) {
                         writer.write(location.get(i));
                         if (i == 0) {
@@ -30,14 +32,15 @@ public class GpsAnalyze {
                         }
                     }
                 }
+                location.clear();
                 line = reader.readLine();
             }
             reader.close();
             writer.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            System.out.println("File Not Found");
         } catch (IOException e) {
-            System.out.println("Date not found");
+            System.out.println("Date Not found");
         }
     }
 
