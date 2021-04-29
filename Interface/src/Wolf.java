@@ -2,6 +2,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * @author 0086C047 潘俊言
+ * @version 1.0
+ */
+
 public class Wolf extends Animal {
     // The age at which a wolf can start to breed.
     private static final int BREEDING_AGE = 7;
@@ -26,15 +31,13 @@ public class Wolf extends Animal {
 
     private boolean isFemale;
 
-    public Wolf(boolean randomAge, Field field, Location location)
-    {
+    public Wolf(boolean randomAge, Field field, Location location) {
         super(field, location);
-        if(randomAge) {
+        if (randomAge) {
             age = rand.nextInt(MAX_AGE);
             foodLevel = rand.nextInt(FOX_FOOD_VALUE);
             isFemale = rand.nextBoolean();
-        }
-        else {
+        } else {
             age = 0;
             foodLevel = FOX_FOOD_VALUE;
             isFemale = true;
@@ -45,53 +48,49 @@ public class Wolf extends Animal {
     public void act(List<Animal> newWolfs) {
         incrementAge();
         incrementHunger();
-        if(isAlive()) {
+        if (isAlive()) {
             giveBirth(newWolfs);
             // Move towards a source of food if found.
             Location location = getLocation();
             Location newLocation = findFood(location);
-            if(newLocation == null) {
+            if (newLocation == null) {
                 // No food found - try to move to a free location.
                 newLocation = getField().freeAdjacentLocation(location);
             }
             // See if it was possible to move.
-            if(newLocation != null) {
+            if (newLocation != null) {
                 setLocation(newLocation);
-            }
-            else {
+            } else {
                 // Overcrowding.
                 setDead();
             }
         }
     }
 
-    private void incrementAge()
-    {
+    private void incrementAge() {
         age++;
-        if(age > MAX_AGE) {
+        if (age > MAX_AGE) {
             setDead();
         }
     }
 
-    private void incrementHunger()
-    {
+    private void incrementHunger() {
         foodLevel--;
-        if(foodLevel <= 0) {
+        if (foodLevel <= 0) {
             setDead();
         }
     }
 
-    private Location findFood(Location location)
-    {
+    private Location findFood(Location location) {
         Field field = getField();
         List<Location> adjacent = field.adjacentLocations(getLocation());
         Iterator<Location> it = adjacent.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             Location where = it.next();
             Object animal = field.getObjectAt(where);
-            if(animal instanceof Fox) {
+            if (animal instanceof Fox) {
                 Fox fox = (Fox) animal;
-                if(fox.isAlive()) {
+                if (fox.isAlive()) {
                     fox.setDead();
                     foodLevel = FOX_FOOD_VALUE;
                     // Remove the dead rabbit from the field.
@@ -102,31 +101,28 @@ public class Wolf extends Animal {
         return null;
     }
 
-    private void giveBirth(List<Animal> newFoxes)
-    {
+    private void giveBirth(List<Animal> newFoxes) {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
-        for(int b = 0; b < births && free.size() > 0; b++) {
+        for (int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
             Fox young = new Fox(false, field, loc);
             newFoxes.add(young);
         }
     }
 
-    private int breed()
-    {
+    private int breed() {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY && isFemale) {
+        if (canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY && isFemale) {
             births = rand.nextInt(MAX_LITTER_SIZE) + 1;
         }
         return births;
     }
 
-    private boolean canBreed()
-    {
+    private boolean canBreed() {
         return age >= BREEDING_AGE;
     }
 
