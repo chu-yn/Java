@@ -10,9 +10,6 @@ public class Transform {
 
     /**
      * constructor
-     *
-     * @param latitude
-     * @param longitude
      */
     public Transform(String latitude, String longitude) {
         this.latitude = latitude;
