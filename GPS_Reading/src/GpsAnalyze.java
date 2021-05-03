@@ -1,3 +1,5 @@
+import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -8,39 +10,45 @@ import java.util.ArrayList;
 
 public class GpsAnalyze {
     public static void main(String[] args) {
-        try {
-            BufferedReader reader =
-                    new BufferedReader(new FileReader("src/NMEA_GPS.txt"));
-            FileWriter writer = new FileWriter("./location.csv");
-            ArrayList<String> location = new ArrayList<>();
-            String line = reader.readLine();
-            while (line != null) {
-                if (line.matches("(.*)GPGGA(.*)")) {
-                    String[] tokens = line.split(",");
-                    location.add(tokens[2]);
-                    location.add(tokens[4]);
-                    location.set(0, Transform.latitudeTrans(location.get(0)));
-                    location.set(1, Transform.longitudeTrans(location.get(1)));
-                }
-                if (!location.isEmpty()) {
-                    for (int i = 0; i <= 1; i++) {
-                        writer.write(location.get(i));
-                        if (i == 0) {
-                            writer.write(",");
-                        } else {
-                            writer.write("\n");
+        JFileChooser fc = new JFileChooser("./", FileSystemView.getFileSystemView());
+        int r = fc.showOpenDialog(null);
+        if (r == JFileChooser.APPROVE_OPTION) {
+            try {
+                BufferedReader reader =
+                        new BufferedReader(new FileReader(fc.getSelectedFile().getAbsolutePath()));
+                FileWriter writer = new FileWriter("./location.csv");
+                ArrayList<String> location = new ArrayList<>();
+                String line = reader.readLine();
+                while (line != null) {
+                    if (line.matches("(.*)GPGGA(.*)")) {
+                        String[] tokens = line.split(",");
+                        location.add(tokens[2]);
+                        location.add(tokens[4]);
+                        location.set(0, Transform.latitudeTrans(location.get(0)));
+                        location.set(1, Transform.longitudeTrans(location.get(1)));
+                    }
+                    if (!location.isEmpty()) {
+                        for (int i = 0; i <= 1; i++) {
+                            writer.write(location.get(i));
+                            if (i == 0) {
+                                writer.write(",");
+                            } else {
+                                writer.write("\n");
+                            }
                         }
                     }
+                    location.clear();
+                    line = reader.readLine();
                 }
-                location.clear();
-                line = reader.readLine();
+                reader.close();
+                writer.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("File Not Found");
+            } catch (IOException e) {
+                System.out.println("Date Not Found");
             }
-            reader.close();
-            writer.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File Not Found");
-        } catch (IOException e) {
-            System.out.println("Date Not found");
+        } else {
+            System.exit(0);
         }
     }
 
