@@ -1,7 +1,8 @@
-package source;
+package tw.ntou.source;
+
 /**
- * @auther 0086C047 潘俊言
  * @version 1.0
+ * @author 0086C047 潘俊言
  */
 
 import javax.swing.*;
