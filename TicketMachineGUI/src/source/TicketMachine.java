@@ -1,4 +1,8 @@
 package source;
+/**
+ * @auther 0086C047 潘俊言
+ * @version 1.0
+ */
 
 import javax.swing.*;
 import java.awt.*;
