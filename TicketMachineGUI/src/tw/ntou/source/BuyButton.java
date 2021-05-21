@@ -1,13 +1,10 @@
 package tw.ntou.source;
-/**
- * process for buy button
- */
 
 import javax.swing.*;
 import java.awt.*;
 
 public class BuyButton {
-    private JFrame frame;
+    private final JFrame frame;
     private int ticketValue;
     // The amount of money entered by a customer so far.
     private int balance;
@@ -24,8 +21,8 @@ public class BuyButton {
     // The amount of 1 coin in machine
     private int oneCoin = 10;
 
-    public BuyButton(Component Iframe, int balance) {
-        frame = (JFrame) Iframe;
+    public BuyButton(Component frame, int balance) {
+        this.frame = (JFrame) frame;
         this.balance = balance;
         // get initial total in machine
         total = fiftyCoin * 50 + tenCoin * 10 + fiveCoin * 5 + oneCoin;

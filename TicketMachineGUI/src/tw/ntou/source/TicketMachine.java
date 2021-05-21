@@ -1,6 +1,5 @@
 package tw.ntou.source;
 
-import tw.ntou.source.BuyButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,12 +27,7 @@ public class TicketMachine {
         c.gridy = 0;
         frame.getContentPane().add(label, c);
         frame.setVisible(true);
-        /*
-        JTextField value = new JTextField(balance);
-        c.gridx = 1;
-        frame.getContentPane().add(value, c);
-        frame.setVisible(true);
-        */
+
         JButton buy = new JButton("Buy");
         buy.addActionListener(e -> {
             BuyButton buyButton = new BuyButton(frame, balance);
