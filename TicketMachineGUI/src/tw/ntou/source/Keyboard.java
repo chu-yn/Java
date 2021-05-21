@@ -18,6 +18,7 @@ public class Keyboard {
         frame.setSize(300, 250);
         frame.setLayout(new GridBagLayout());
         frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
         text = new JTextField();
         GridBagConstraints c1 = new GridBagConstraints();
