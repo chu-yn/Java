@@ -24,9 +24,9 @@ public class BuyButton {
     // The amount of 1 coin in machine
     private int oneCoin = 10;
 
-    public BuyButton(Component Iframe) {
+    public BuyButton(Component Iframe, int balance) {
         frame = (JFrame) Iframe;
-        balance = 0;
+        this.balance = balance;
         // get initial total in machine
         total = fiftyCoin * 50 + tenCoin * 10 + fiveCoin * 5 + oneCoin;
         process();
@@ -44,8 +44,8 @@ public class BuyButton {
             machineProcess(Integer.parseInt(ticketCost.toString()));
             Object[] options = {"Yes", "No"};
             int result = JOptionPane.showOptionDialog(frame, "Continue to buy?", "Warning",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-            if (result == 1) {
+                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+            if (result == JOptionPane.NO_OPTION) {
                 isContinue = false;
             }
         }

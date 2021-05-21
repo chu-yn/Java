@@ -7,8 +7,10 @@ import java.awt.*;
 
 public class TicketMachine {
     private JFrame frame;
+    private int balance;
 
     public TicketMachine() {
+        balance = 0;
         makeFrame();
     }
 
@@ -21,7 +23,7 @@ public class TicketMachine {
 
         JButton buy = new JButton("Buy");
         GridBagConstraints c = new GridBagConstraints();
-        buy.addActionListener(e -> new BuyButton(frame));
+        buy.addActionListener(e -> new BuyButton(frame, balance));
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
