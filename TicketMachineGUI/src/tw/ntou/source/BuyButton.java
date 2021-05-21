@@ -58,6 +58,10 @@ public class BuyButton {
      */
     public void machineProcess(int ticketCost) {
         String value = JOptionPane.showInputDialog("Please input amount you want");
+        while (notNum(value) || value.isEmpty()) {
+            JOptionPane.showMessageDialog(frame, "Please insert positive integer!");
+            value = JOptionPane.showInputDialog("Please input amount you want");
+        }
         ticketValue = Integer.parseInt(value);
         price = ticketCost * ticketValue;
         buyProcess();
@@ -145,14 +149,13 @@ public class BuyButton {
      */
     public void insertMoney() {
         String amount = JOptionPane.showInputDialog("Insert Money");
-        if (Integer.parseInt(amount) > 0) {
-            balance = balance + Integer.parseInt(amount);
-            getCoin(Integer.parseInt(amount));
-            JOptionPane.showMessageDialog(frame,
-                    "Balance has been inserted: " + getBalance());
-        } else {
-            JOptionPane.showMessageDialog(frame, "Use a positive amount: " + amount);
+        while (notNum(amount) || amount.isEmpty()) {
+            JOptionPane.showMessageDialog(frame, "Please insert positive integer!");
+            amount = JOptionPane.showInputDialog("Insert Money");
         }
+        balance = balance + Integer.parseInt(amount);
+        getCoin(Integer.parseInt(amount));
+        JOptionPane.showMessageDialog(frame, "Balance has been inserted: " + getBalance());
     }
 
     /**
@@ -169,4 +172,18 @@ public class BuyButton {
         balance = balance - price;
     }
 
+    /**
+     * function of determining whether string is integer
+     *
+     * @param str input
+     * @return boolean
+     */
+    public static boolean notNum(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

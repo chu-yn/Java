@@ -8,7 +8,6 @@ import java.awt.*;
 public class TicketMachine {
     private JFrame frame;
 
-
     public TicketMachine() {
         makeFrame();
     }
@@ -35,6 +34,4 @@ public class TicketMachine {
         frame.getContentPane().add(exit, c);
         frame.setVisible(true);
     }
-
-
 }
