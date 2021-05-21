@@ -18,7 +18,7 @@ public class TicketMachine {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new GridBagLayout());
-
+        // add balance remain label
         JLabel label = new JLabel("Balance: " + balance);
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -26,7 +26,7 @@ public class TicketMachine {
         c.gridy = 0;
         frame.getContentPane().add(label, c);
         frame.setVisible(true);
-
+        // add buy button
         JButton buy = new JButton("Buy");
         buy.addActionListener(e -> {
             BuyButton buyButton = new BuyButton(frame, balance);
@@ -37,7 +37,7 @@ public class TicketMachine {
         c.gridy = 1;
         frame.getContentPane().add(buy, c);
         frame.setVisible(true);
-
+        // add exit button
         JButton exit = new JButton("Exit");
         exit.addActionListener(e -> {
             JOptionPane.showMessageDialog(frame, "Refund balance\n" + balance + " cents");
