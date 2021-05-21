@@ -29,28 +29,28 @@ public class BuyButton {
         this.balance = balance;
         // get initial total in machine
         total = fiftyCoin * 50 + tenCoin * 10 + fiveCoin * 5 + oneCoin;
-        process();
     }
 
     /**
      * all process for BuyButton
+     *
+     * @return balance
      */
-    public void process() {
-        boolean isContinue = true;
-        while (isContinue) {
-            Object[] possibleValues = {"150", "90"};
-            Object ticketCost = JOptionPane.showInputDialog(frame, "Which Price", "Price",
-                    JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
-            machineProcess(Integer.parseInt(ticketCost.toString()));
-            Object[] options = {"Yes", "No"};
-            int result = JOptionPane.showOptionDialog(frame, "Continue to buy?", "Warning",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-            if (result == JOptionPane.NO_OPTION) {
-                isContinue = false;
-            }
+    public int process() {
+        Object[] possibleValues = {"150", "90"};
+        Object ticketCost = JOptionPane.showInputDialog(frame, "Which Price", "Price",
+                JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
+        machineProcess(Integer.parseInt(ticketCost.toString()));
+        Object[] options = {"Yes", "No"};
+        int result = JOptionPane.showOptionDialog(frame, "Continue to buy?", "Warning",
+                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+        if (result == JOptionPane.NO_OPTION) {
+            JOptionPane.showMessageDialog(frame, "Refund balance\n" + refundBalance() + " cents");
+            System.exit(0);
+        } else if (result == JOptionPane.YES_OPTION) {
+            return getBalance();
         }
-        JOptionPane.showMessageDialog(frame, "Refund balance\n" + refundBalance() + " cents");
-        System.exit(0);
+        return 0;
     }
 
     /**

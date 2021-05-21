@@ -21,18 +21,36 @@ public class TicketMachine {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new GridBagLayout());
 
-        JButton buy = new JButton("Buy");
+        JLabel label = new JLabel("Balance: " + balance);
         GridBagConstraints c = new GridBagConstraints();
-        buy.addActionListener(e -> new BuyButton(frame, balance));
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
+        frame.getContentPane().add(label, c);
+        frame.setVisible(true);
+        /*
+        JTextField value = new JTextField(balance);
+        c.gridx = 1;
+        frame.getContentPane().add(value, c);
+        frame.setVisible(true);
+        */
+        JButton buy = new JButton("Buy");
+        buy.addActionListener(e -> {
+            BuyButton buyButton = new BuyButton(frame, balance);
+            balance = buyButton.process();
+            label.setText("Balance: " + balance);
+        });
+        c.gridx = 0;
+        c.gridy = 1;
         frame.getContentPane().add(buy, c);
         frame.setVisible(true);
 
         JButton exit = new JButton("Exit");
-        exit.addActionListener(e -> System.exit(0));
-        c.gridx = 1;
+        exit.addActionListener(e -> {
+            JOptionPane.showMessageDialog(frame, "Refund balance\n" + balance + " cents");
+            System.exit(0);
+        });
+        c.gridx = 2;
         frame.getContentPane().add(exit, c);
         frame.setVisible(true);
     }
