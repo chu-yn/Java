@@ -1,6 +1,5 @@
 package tw.ntou.source;
 
-
 import javax.swing.*;
 import java.awt.*;
 
