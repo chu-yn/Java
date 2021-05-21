@@ -29,6 +29,13 @@ public class BuyButton {
         balance = 0;
         // get initial total in machine
         total = fiftyCoin * 50 + tenCoin * 10 + fiveCoin * 5 + oneCoin;
+        process();
+    }
+
+    /**
+     * all process for BuyButton
+     */
+    public void process() {
         boolean isContinue = true;
         while (isContinue) {
             Object[] possibleValues = {"150", "90"};
