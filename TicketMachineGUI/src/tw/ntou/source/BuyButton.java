@@ -11,21 +11,10 @@ public class BuyButton {
     // The price of a ticket from this machine.
     private int price;
     // The total amount of money collected by this machine.
-    private int total;
-    // The amount of 50 coin in machine
-    private int fiftyCoin = 10;
-    // The amount of 10 coin in machine
-    private int tenCoin = 10;
-    // The amount of 5 coin in machine
-    private int fiveCoin = 10;
-    // The amount of 1 coin in machine
-    private int oneCoin = 10;
 
     public BuyButton(Component frame, int balance) {
         this.frame = (JFrame) frame;
         this.balance = balance;
-        // get initial total in machine
-        total = fiftyCoin * 50 + tenCoin * 10 + fiveCoin * 5 + oneCoin;
     }
 
     /**
@@ -42,7 +31,7 @@ public class BuyButton {
         int result = JOptionPane.showOptionDialog(frame, "Continue to buy?", "Warning",
                 JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
         if (result == JOptionPane.NO_OPTION) {
-            JOptionPane.showMessageDialog(frame, "Refund balance\n" + refundBalance() + " cents");
+            JOptionPane.showMessageDialog(frame, "Refund balance\n" + getBalance() + " cents");
             System.exit(0);
         } else if (result == JOptionPane.YES_OPTION) {
             return getBalance();
@@ -79,37 +68,6 @@ public class BuyButton {
     }
 
     /**
-     * get amount of refund coin
-     */
-    public void refundCoin(int amount) {
-        int quarters = amount / 50;
-        fiftyCoin -= quarters;
-        amount %= 50;
-        int dimes = amount / 10;
-        tenCoin -= dimes;
-        amount %= 10;
-        int nickels = amount / 5;
-        fiveCoin -= nickels;
-        amount %= 5;
-        int pennies = amount;
-        oneCoin -= pennies;
-    }
-
-    /**
-     * The balance is cleared.
-     *
-     * @return the money in the balance
-     */
-    public int refundBalance() {
-        int amountToRefund;
-        amountToRefund = balance;
-        refundCoin(balance);
-        total -= balance;
-        balance = 0;
-        return amountToRefund;
-    }
-
-    /**
      * Return The price of a ticket.
      */
     public int getPrice() {
@@ -124,23 +82,6 @@ public class BuyButton {
     }
 
     /**
-     * get amount of coins which inserted by user
-     */
-    public void getCoin(int amount) {
-        int quarters = amount / 50;
-        fiftyCoin += quarters;
-        amount %= 50;
-        int dimes = amount / 10;
-        tenCoin += dimes;
-        amount %= 10;
-        int nickels = amount / 5;
-        fiveCoin += nickels;
-        amount %= 5;
-        int pennies = amount;
-        oneCoin += pennies;
-    }
-
-    /**
      * Receive an amount of money in cents from a customer. Check that the amount is
      * sensible.
      */
@@ -151,7 +92,6 @@ public class BuyButton {
             amount = JOptionPane.showInputDialog("Insert Money");
         }
         balance = balance + Integer.parseInt(amount);
-        getCoin(Integer.parseInt(amount));
         JOptionPane.showMessageDialog(frame, "Balance has been inserted: " + getBalance());
     }
 
@@ -164,7 +104,6 @@ public class BuyButton {
                 "##################\n" + "# The BlueJ Line\n" + "# Ticket\n"
                         + "# " + price + " cents.\n" + "# Amount\n" + "# " + ticketValue + "\n##################");
         // Update the total collected with the price.
-        total = total + balance;
         // Reduce the balance by the price.
         balance = balance - price;
     }
