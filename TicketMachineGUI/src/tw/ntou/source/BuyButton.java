@@ -64,7 +64,6 @@ public class BuyButton {
             insertMoney();
         }
         printTicket();
-        JOptionPane.showMessageDialog(frame, "Balance you have: " + getBalance());
     }
 
     /**

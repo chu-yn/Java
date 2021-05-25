@@ -1,8 +1,9 @@
-package tw.ntou;
 /**
- * @version 1.0
+ * @version 1.1
  * @author 0086C047 潘俊言
  */
+
+package tw.ntou;
 
 import tw.ntou.source.TicketMachine;
 
