@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BuyButton {
-    private final JFrame frame;
+    private final JFrame button;
     private int ticketValue;
     // The amount of money entered by a customer so far.
     private int balance;
@@ -13,7 +13,7 @@ public class BuyButton {
     // The total amount of money collected by this machine.
 
     public BuyButton(Component frame, int balance) {
-        this.frame = (JFrame) frame;
+        this.button = (JFrame) frame;
         this.balance = balance;
     }
 
@@ -24,14 +24,14 @@ public class BuyButton {
      */
     public int process() {
         Object[] possibleValues = {"150", "90"};
-        Object ticketCost = JOptionPane.showInputDialog(frame, "Which Price", "Price",
+        Object ticketCost = JOptionPane.showInputDialog(button, "Which Price", "Price",
                 JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
         machineProcess(Integer.parseInt(ticketCost.toString()));
         Object[] options = {"Yes", "No"};
-        int result = JOptionPane.showOptionDialog(frame, "Continue to buy?", "Warning",
+        int result = JOptionPane.showOptionDialog(button, "Continue to buy?", "Warning",
                 JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
         if (result == JOptionPane.NO_OPTION) {
-            JOptionPane.showMessageDialog(frame, "Refund balance\n" + getBalance() + " cents");
+            JOptionPane.showMessageDialog(button, "Refund balance\n" + getBalance() + " cents");
             System.exit(0);
         } else if (result == JOptionPane.YES_OPTION) {
             return getBalance();
@@ -45,7 +45,7 @@ public class BuyButton {
     public void machineProcess(int ticketCost) {
         String value = JOptionPane.showInputDialog("Please input amount you want");
         while (notNum(value) || value.isEmpty()) {
-            JOptionPane.showMessageDialog(frame, "Please insert positive integer!");
+            JOptionPane.showMessageDialog(button, "Please insert positive integer!");
             value = JOptionPane.showInputDialog("Please input amount you want");
         }
         ticketValue = Integer.parseInt(value);
@@ -57,9 +57,9 @@ public class BuyButton {
      * method of buying ticket process
      */
     public void buyProcess() {
-        JOptionPane.showMessageDialog(frame, "Price need to Pay: " + getPrice());
+        JOptionPane.showMessageDialog(button, "Price need to Pay: " + getPrice());
         while (balance < price) {
-            JOptionPane.showMessageDialog(frame,
+            JOptionPane.showMessageDialog(button,
                     "You must insert at least " + (price - balance) + " more balance.");
             insertMoney();
         }
@@ -87,11 +87,11 @@ public class BuyButton {
     public void insertMoney() {
         String amount = JOptionPane.showInputDialog("Insert Money");
         while (notNum(amount) || amount.isEmpty()) {
-            JOptionPane.showMessageDialog(frame, "Please insert positive integer!");
+            JOptionPane.showMessageDialog(button, "Please insert positive integer!");
             amount = JOptionPane.showInputDialog("Insert Money");
         }
         balance = balance + Integer.parseInt(amount);
-        JOptionPane.showMessageDialog(frame, "Balance has been inserted: " + getBalance());
+        JOptionPane.showMessageDialog(button, "Balance has been inserted: " + getBalance());
     }
 
     /**
@@ -99,7 +99,7 @@ public class BuyButton {
      */
     public void printTicket() {
         // Simulate the printing of a ticket.
-        JOptionPane.showMessageDialog(frame,
+        JOptionPane.showMessageDialog(button,
                 "##################\n" + "# The BlueJ Line\n" + "# Ticket\n"
                         + "# " + price + " cents.\n" + "# Amount\n" + "# " + ticketValue + "\n##################");
         // Update the total collected with the price.

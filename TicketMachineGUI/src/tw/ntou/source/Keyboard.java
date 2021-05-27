@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Keyboard {
-    private JFrame frame;
+    private JFrame keyboard;
     private JTextField text;
     private String value;
 
@@ -14,11 +14,11 @@ public class Keyboard {
     }
 
     private String makeFrame() {
-        frame = new JFrame("KeyBoard");
-        frame.setSize(300, 250);
-        frame.setLayout(new GridBagLayout());
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        keyboard = new JFrame("KeyBoard");
+        keyboard.setSize(300, 250);
+        keyboard.setLayout(new GridBagLayout());
+        keyboard.setLocationRelativeTo(null);
+        keyboard.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
         text = new JTextField();
         GridBagConstraints c1 = new GridBagConstraints();
@@ -30,7 +30,7 @@ public class Keyboard {
         c1.weighty = 0;
         c1.fill = GridBagConstraints.BOTH;
         c1.anchor = GridBagConstraints.WEST;
-        frame.add(text, c1);
+        keyboard.add(text, c1);
 
         makeButton("1", 0, 1);
         makeButton("2", 1, 1);
@@ -52,8 +52,8 @@ public class Keyboard {
         c5.fill = GridBagConstraints.HORIZONTAL;
         c5.gridx = 0;
         c5.gridy = 4;
-        frame.getContentPane().add(exit, c5);
-        frame.setVisible(true);
+        keyboard.getContentPane().add(exit, c5);
+        keyboard.setVisible(true);
 
         JButton ok = new JButton("OK");
         ok.addActionListener(e -> {
@@ -61,20 +61,20 @@ public class Keyboard {
             System.exit(0);
         });
         c5.gridx = 2;
-        frame.getContentPane().add(ok, c5);
-        frame.setVisible(true);
+        keyboard.getContentPane().add(ok, c5);
+        keyboard.setVisible(true);
         return value;
     }
 
-    private void makeButton(String title, int x, int y) {
-        JButton tmp = new JButton(title);
+    private void makeButton(String number, int x, int y) {
+        JButton tmp = new JButton(number);
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 1;
         c.gridx = x;
         c.gridy = y;
-        tmp.addActionListener(e -> text.setText(text.getText() + title));
-        frame.getContentPane().add(tmp, c);
+        tmp.addActionListener(e -> text.setText(text.getText() + number));
+        keyboard.getContentPane().add(tmp, c);
     }
 }
