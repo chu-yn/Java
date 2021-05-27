@@ -3,23 +3,21 @@ package tw.ntou.source;
 import javax.swing.*;
 import java.awt.*;
 
-public class Keyboard {
-    private JFrame keyboard;
+public class Keyboard extends JDialog {
     private JTextField text;
     private String value;
 
-    public Keyboard(String value) {
-        this.value = value;
+
+    public Keyboard() {
         makeFrame();
     }
 
-    private String makeFrame() {
-        keyboard = new JFrame("KeyBoard");
-        keyboard.setSize(300, 250);
-        keyboard.setLayout(new GridBagLayout());
-        keyboard.setLocationRelativeTo(null);
-        keyboard.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-
+    public void makeFrame() {
+        setSize(300, 250);
+        setLayout(new GridBagLayout());
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        setModalityType(DEFAULT_MODALITY_TYPE);
         text = new JTextField();
         GridBagConstraints c1 = new GridBagConstraints();
         c1.gridx = 0;
@@ -30,7 +28,7 @@ public class Keyboard {
         c1.weighty = 0;
         c1.fill = GridBagConstraints.BOTH;
         c1.anchor = GridBagConstraints.WEST;
-        keyboard.add(text, c1);
+        add(text, c1);
 
         makeButton("1", 0, 1);
         makeButton("2", 1, 1);
@@ -45,28 +43,23 @@ public class Keyboard {
 
         JButton exit = new JButton("Cancel");
         GridBagConstraints c5 = new GridBagConstraints();
-        exit.addActionListener(e -> {
-            value = "";
-            System.exit(0);
-        });
+        exit.addActionListener(e -> dispose());
         c5.fill = GridBagConstraints.HORIZONTAL;
         c5.gridx = 0;
         c5.gridy = 4;
-        keyboard.getContentPane().add(exit, c5);
-        keyboard.setVisible(true);
+        getContentPane().add(exit, c5);
 
         JButton ok = new JButton("OK");
         ok.addActionListener(e -> {
             value = text.getText();
-            System.exit(0);
+            setVisible(false);
         });
         c5.gridx = 2;
-        keyboard.getContentPane().add(ok, c5);
-        keyboard.setVisible(true);
-        return value;
+        getContentPane().add(ok, c5);
+        setVisible(true);
     }
 
-    private void makeButton(String number, int x, int y) {
+    public void makeButton(String number, int x, int y) {
         JButton tmp = new JButton(number);
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -75,6 +68,10 @@ public class Keyboard {
         c.gridx = x;
         c.gridy = y;
         tmp.addActionListener(e -> text.setText(text.getText() + number));
-        keyboard.getContentPane().add(tmp, c);
+        getContentPane().add(tmp, c);
+    }
+
+    public String getValue() {
+        return value;
     }
 }

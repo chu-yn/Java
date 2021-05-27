@@ -3,7 +3,7 @@ package tw.ntou.source;
 import javax.swing.*;
 import java.awt.*;
 
-public class TicketMachine {
+public class TicketMachine extends JFrame{
     private JFrame frame;
     private int balance;
 

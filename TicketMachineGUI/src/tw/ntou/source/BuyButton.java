@@ -1,9 +1,12 @@
 package tw.ntou.source;
 
+import tw.ntou.source.Keyboard;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class BuyButton {
+
+public class BuyButton extends JFrame{
     private final JFrame button;
     private int ticketValue;
     // The amount of money entered by a customer so far.
@@ -23,6 +26,7 @@ public class BuyButton {
      * @return balance
      */
     public int process() {
+        button.setDefaultCloseOperation(EXIT_ON_CLOSE);
         Object[] possibleValues = {"150", "90"};
         Object ticketCost = JOptionPane.showInputDialog(button, "Which Price", "Price",
                 JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
@@ -34,6 +38,7 @@ public class BuyButton {
             JOptionPane.showMessageDialog(button, "Refund balance\n" + getBalance() + " cents");
             System.exit(0);
         } else if (result == JOptionPane.YES_OPTION) {
+            button.setVisible(true);
             return getBalance();
         }
         return 0;
@@ -43,10 +48,11 @@ public class BuyButton {
      * method of TicketMachine process
      */
     public void machineProcess(int ticketCost) {
-        String value = JOptionPane.showInputDialog("Please input amount you want");
+        JOptionPane.showMessageDialog(button, "Please input amount you want.");
+        Keyboard keyboard = new Keyboard();
+        String value = keyboard.getValue();
         while (notNum(value) || value.isEmpty()) {
-            JOptionPane.showMessageDialog(button, "Please insert positive integer!");
-            value = JOptionPane.showInputDialog("Please input amount you want");
+            machineProcess(ticketCost);
         }
         ticketValue = Integer.parseInt(value);
         price = ticketCost * ticketValue;
@@ -85,10 +91,11 @@ public class BuyButton {
      * sensible.
      */
     public void insertMoney() {
-        String amount = JOptionPane.showInputDialog("Insert Money");
+        JOptionPane.showMessageDialog(button, "Please insert Money");
+        Keyboard keyboard = new Keyboard();
+        String amount = keyboard.getValue();
         while (notNum(amount) || amount.isEmpty()) {
-            JOptionPane.showMessageDialog(button, "Please insert positive integer!");
-            amount = JOptionPane.showInputDialog("Insert Money");
+            insertMoney();
         }
         balance = balance + Integer.parseInt(amount);
         JOptionPane.showMessageDialog(button, "Balance has been inserted: " + getBalance());
