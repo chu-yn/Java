@@ -52,7 +52,7 @@ public class Keyboard extends JDialog {
         JButton ok = new JButton("OK");
         ok.addActionListener(e -> {
             value = text.getText();
-            setVisible(false);
+            dispose();
         });
         c5.gridx = 2;
         getContentPane().add(ok, c5);

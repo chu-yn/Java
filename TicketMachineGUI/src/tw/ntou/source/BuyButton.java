@@ -1,12 +1,9 @@
 package tw.ntou.source;
 
-import tw.ntou.source.Keyboard;
-
 import javax.swing.*;
 import java.awt.*;
 
-
-public class BuyButton extends JFrame{
+public class BuyButton extends JFrame {
     private final JFrame button;
     private int ticketValue;
     // The amount of money entered by a customer so far.
@@ -51,25 +48,27 @@ public class BuyButton extends JFrame{
         JOptionPane.showMessageDialog(button, "Please input amount you want.");
         Keyboard keyboard = new Keyboard();
         String value = keyboard.getValue();
-        while (notNum(value) || value.isEmpty()) {
+        if (notNum(value) || value.isEmpty()) {
+            JOptionPane.showMessageDialog(button, "Please insert positive integer!");
             machineProcess(ticketCost);
         }
         ticketValue = Integer.parseInt(value);
         price = ticketCost * ticketValue;
+        JOptionPane.showMessageDialog(button, "Price need to Pay: " + getPrice());
         buyProcess();
+        printTicket();
     }
 
     /**
      * method of buying ticket process
      */
     public void buyProcess() {
-        JOptionPane.showMessageDialog(button, "Price need to Pay: " + getPrice());
-        while (balance < price) {
+        insertMoney();
+        if (balance < price) {
             JOptionPane.showMessageDialog(button,
                     "You must insert at least " + (price - balance) + " more balance.");
-            insertMoney();
+            buyProcess();
         }
-        printTicket();
     }
 
     /**
@@ -95,7 +94,10 @@ public class BuyButton extends JFrame{
         Keyboard keyboard = new Keyboard();
         String amount = keyboard.getValue();
         while (notNum(amount) || amount.isEmpty()) {
-            insertMoney();
+            JOptionPane.showMessageDialog(button, "Please insert positive integer!");
+            JOptionPane.showMessageDialog(button, "Please insert Money");
+            Keyboard inner = new Keyboard();
+            amount = inner.getValue();
         }
         balance = balance + Integer.parseInt(amount);
         JOptionPane.showMessageDialog(button, "Balance has been inserted: " + getBalance());
