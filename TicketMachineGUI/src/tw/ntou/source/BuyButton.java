@@ -20,7 +20,7 @@ public class BuyButton extends JFrame {
     // buy times
     private int times;
     // file path initial
-    File path = new File("./");
+    File path = new File("./out/");
 
     public BuyButton(Component frame, long balance, int times) {
         this.button = (JFrame) frame;

@@ -17,7 +17,7 @@ public class Keyboard extends JDialog {
 
     public void makeFrame() {
         setTitle("Keyboard");
-        setSize(250, 200);
+        setSize(300, 250);
         setLayout(new GridBagLayout());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -46,7 +46,6 @@ public class Keyboard extends JDialog {
 
         // make cancel button
         JButton exit = new JButton("Cancel");
-        exit.setBorder(BorderFactory.createEtchedBorder());
         GridBagConstraints c2 = new GridBagConstraints();
         exit.addActionListener(e -> dispose());
         c2.fill = GridBagConstraints.BOTH;
@@ -56,7 +55,6 @@ public class Keyboard extends JDialog {
 
         // make ok button
         JButton ok = new JButton("OK");
-        ok.setBorder(BorderFactory.createEtchedBorder());
         ok.addActionListener(e -> {
             value = text.getText();
             dispose();
@@ -79,7 +77,6 @@ public class Keyboard extends JDialog {
      */
     public void makeButton(String number, int x, int y) {
         JButton tmp = new JButton(number);
-        tmp.setBorder(BorderFactory.createEtchedBorder());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
         c.insets = new Insets(5, 5, 5, 5);
