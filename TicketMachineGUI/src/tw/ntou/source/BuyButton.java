@@ -5,14 +5,14 @@ import java.awt.*;
 
 public class BuyButton extends JFrame {
     private final JFrame button;
-    private int ticketValue;
+    private long ticketValue;
     // The amount of money entered by a customer so far.
-    private int balance;
+    private long balance;
     // The price of a ticket from this machine.
-    private int price;
+    private long price;
     // The total amount of money collected by this machine.
 
-    public BuyButton(Component frame, int balance) {
+    public BuyButton(Component frame, long balance) {
         this.button = (JFrame) frame;
         this.balance = balance;
     }
@@ -22,7 +22,7 @@ public class BuyButton extends JFrame {
      *
      * @return balance
      */
-    public int process() {
+    public long process() {
         button.setDefaultCloseOperation(EXIT_ON_CLOSE);
         Object[] possibleValues = {"150", "90"};
         Object ticketCost = JOptionPane.showInputDialog(button, "Which Price", "Price",
@@ -52,10 +52,12 @@ public class BuyButton extends JFrame {
             JOptionPane.showMessageDialog(button, "Please insert positive integer!");
             machineProcess(ticketCost);
         }
-        ticketValue = Integer.parseInt(value);
+        ticketValue = Long.parseLong(value);
         price = ticketCost * ticketValue;
         JOptionPane.showMessageDialog(button, "Price need to Pay: " + getPrice());
-        buyProcess();
+        if (balance < price) {
+            buyProcess();
+        }
         printTicket();
     }
 
@@ -74,14 +76,14 @@ public class BuyButton extends JFrame {
     /**
      * Return The price of a ticket.
      */
-    public int getPrice() {
+    public long getPrice() {
         return price;
     }
 
     /**
      * Return The amount of money already inserted for the next ticket.
      */
-    public int getBalance() {
+    public long getBalance() {
         return balance;
     }
 

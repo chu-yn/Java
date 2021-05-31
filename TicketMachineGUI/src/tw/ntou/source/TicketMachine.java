@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class TicketMachine extends JFrame {
     private JFrame frame;
-    private int balance;
+    private long balance;
 
     public TicketMachine() {
         balance = 0;
