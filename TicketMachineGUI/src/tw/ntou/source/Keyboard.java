@@ -13,19 +13,15 @@ public class Keyboard extends JDialog {
     }
 
     public void makeFrame() {
-        setSize(300, 250);
+        setTitle("Keyboard");
+        setSize(250, 200);
         setLayout(new GridBagLayout());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setModalityType(DEFAULT_MODALITY_TYPE);
         text = new JTextField();
         GridBagConstraints c1 = new GridBagConstraints();
-        c1.gridx = 0;
-        c1.gridy = 0;
-        c1.gridwidth = 4;
-        c1.gridheight = 1;
-        c1.weightx = 0;
-        c1.weighty = 0;
+        buildConstraints(c1, 0, 0, 4, 1, 0, 0);
         c1.fill = GridBagConstraints.BOTH;
         c1.anchor = GridBagConstraints.WEST;
         add(text, c1);
@@ -42,14 +38,15 @@ public class Keyboard extends JDialog {
         makeButton("0", 1, 4);
 
         JButton exit = new JButton("Cancel");
+        exit.setBorder(BorderFactory.createEtchedBorder());
         GridBagConstraints c5 = new GridBagConstraints();
         exit.addActionListener(e -> dispose());
         c5.fill = GridBagConstraints.HORIZONTAL;
-        c5.gridx = 0;
-        c5.gridy = 4;
+        buildConstraints(c5, 0, 4, 1, 1, 0, 0);
         getContentPane().add(exit, c5);
 
         JButton ok = new JButton("OK");
+        ok.setBorder(BorderFactory.createEtchedBorder());
         ok.addActionListener(e -> {
             value = text.getText();
             dispose();
@@ -61,14 +58,21 @@ public class Keyboard extends JDialog {
 
     public void makeButton(String number, int x, int y) {
         JButton tmp = new JButton(number);
+        tmp.setBorder(BorderFactory.createEtchedBorder());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 1;
-        c.gridx = x;
-        c.gridy = y;
+        buildConstraints(c, x, y, 1, 1, 10, 0);
         tmp.addActionListener(e -> text.setText(text.getText() + number));
         getContentPane().add(tmp, c);
+    }
+
+    public static void buildConstraints(GridBagConstraints con, int gx, int gy, int gw, int gh, int wx, int wy) {
+        con.gridx = gx;
+        con.gridy = gy;
+        con.gridwidth = gw;
+        con.gridheight = gh;
+        con.weightx = wx;
+        con.weighty = wy;
     }
 
     public String getValue() {
