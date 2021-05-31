@@ -2,12 +2,16 @@ package tw.ntou.source;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
 
 /**
  * class for the process of buy button being pressed
  */
 public class BuyButton extends JFrame {
     private final JFrame button;
+    // ticket you selected
+    private Object ticketCost;
+    // amount of ticket
     private long ticketValue;
     // The amount of money entered by a customer so far.
     private long balance;
@@ -15,11 +19,16 @@ public class BuyButton extends JFrame {
     private long price;
     // buy times
     private int times;
+    // file path initial
+    File path = new File("./");
 
     public BuyButton(Component frame, long balance, int times) {
         this.button = (JFrame) frame;
         this.balance = balance;
         this.times = times;
+        if (times == 0) {
+            initReceipt();
+        }
     }
 
     /**
@@ -30,7 +39,7 @@ public class BuyButton extends JFrame {
     public long process() {
         button.setDefaultCloseOperation(EXIT_ON_CLOSE);
         Object[] possibleValues = {"150", "90"};
-        Object ticketCost = JOptionPane.showInputDialog(button, "Which Price", "Price",
+        ticketCost = JOptionPane.showInputDialog(button, "Which Price", "Price",
                 JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
         machineProcess(Integer.parseInt(ticketCost.toString()));
         Object[] options = {"Yes", "No"};
@@ -128,8 +137,31 @@ public class BuyButton extends JFrame {
     /**
      * create csv file for detail
      */
-    public void printReceipt() {
+    public void initReceipt() {
+        try {
+            FileWriter writer = new FileWriter(path + "/receipt.csv");
+            writer.write("Times,Price,Amount,Total,Balance\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    /**
+     * write csv file for detail
+     */
+    public void printReceipt() {
+        try {
+            FileWriter writer = new FileWriter(path + "/receipt.csv", true);
+            writer.write((times + 1) + ",");
+            writer.write(ticketCost.toString() + ",");
+            writer.write(ticketValue + ",");
+            writer.write(price + ",");
+            writer.write(balance + "\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
