@@ -3,6 +3,9 @@ package tw.ntou.source;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * class for the process of buy button being pressed
+ */
 public class BuyButton extends JFrame {
     private final JFrame button;
     private long ticketValue;
@@ -10,11 +13,13 @@ public class BuyButton extends JFrame {
     private long balance;
     // The price of a ticket from this machine.
     private long price;
-    // The total amount of money collected by this machine.
+    // buy times
+    private int times;
 
-    public BuyButton(Component frame, long balance) {
+    public BuyButton(Component frame, long balance, int times) {
         this.button = (JFrame) frame;
         this.balance = balance;
+        this.times = times;
     }
 
     /**
@@ -59,6 +64,7 @@ public class BuyButton extends JFrame {
             buyProcess();
         }
         printTicket();
+        times += 1;
     }
 
     /**
@@ -116,6 +122,14 @@ public class BuyButton extends JFrame {
         // Update the total collected with the price.
         // Reduce the balance by the price.
         balance = balance - price;
+        printReceipt();
+    }
+
+    /**
+     * create csv file for detail
+     */
+    public void printReceipt() {
+
     }
 
     /**
@@ -131,5 +145,14 @@ public class BuyButton extends JFrame {
             }
         }
         return false;
+    }
+
+    /**
+     * get times
+     *
+     * @return times
+     */
+    public int getTimes() {
+        return times;
     }
 }

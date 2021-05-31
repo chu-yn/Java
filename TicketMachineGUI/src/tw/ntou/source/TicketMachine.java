@@ -3,15 +3,23 @@ package tw.ntou.source;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * class for building main frame of TicketMachine
+ */
 public class TicketMachine extends JFrame {
     private JFrame frame;
     private long balance;
+    private int times;
 
     public TicketMachine() {
         balance = 0;
+        times = 0;
         makeFrame();
     }
 
+    /**
+     * make main frame
+     */
     public void makeFrame() {
         frame = new JFrame("TicketMachine");
         frame.setSize(350, 300);
@@ -52,8 +60,9 @@ public class TicketMachine extends JFrame {
         buy.setAlignmentX(Component.CENTER_ALIGNMENT);
         buy.setAlignmentY(Component.CENTER_ALIGNMENT);
         buy.addActionListener(e -> {
-            BuyButton buyButton = new BuyButton(frame, balance);
+            BuyButton buyButton = new BuyButton(frame, balance, times);
             balance = buyButton.process();
+            times = buyButton.getTimes();
             label.setText("Balance: " + balance);
         });
 
@@ -74,6 +83,7 @@ public class TicketMachine extends JFrame {
         buttonPanel.add(Box.createHorizontalStrut(15));
         buttonPanel.add(exit);
 
+        // main frame
         frame.add(Box.createVerticalGlue());
         frame.getContentPane().add(textPanel);
         frame.getContentPane().add(buttonPanel);

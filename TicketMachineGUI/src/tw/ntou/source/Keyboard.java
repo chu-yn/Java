@@ -3,6 +3,9 @@ package tw.ntou.source;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * class for generate a virtual number keyboard
+ */
 public class Keyboard extends JDialog {
     private JTextField text;
     private String value;
@@ -67,6 +70,13 @@ public class Keyboard extends JDialog {
         setVisible(true);
     }
 
+    /**
+     * method to make number button
+     *
+     * @param number title
+     * @param x      column
+     * @param y      row
+     */
     public void makeButton(String number, int x, int y) {
         JButton tmp = new JButton(number);
         tmp.setBorder(BorderFactory.createEtchedBorder());
@@ -78,6 +88,15 @@ public class Keyboard extends JDialog {
         getContentPane().add(tmp, c);
     }
 
+    /**
+     * to build GridBagConstraints
+     *
+     * @param con Constraints
+     * @param gx  gridx
+     * @param gy  gridy
+     * @param gw  gridwidth
+     * @param wx  weightx
+     */
     public static void buildConstraints(GridBagConstraints con, int gx, int gy, int gw, int wx) {
         con.gridx = gx;
         con.gridy = gy;
@@ -85,6 +104,11 @@ public class Keyboard extends JDialog {
         con.weightx = wx;
     }
 
+    /**
+     * get input value
+     *
+     * @return value
+     */
     public String getValue() {
         return value;
     }
