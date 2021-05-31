@@ -19,13 +19,17 @@ public class Keyboard extends JDialog {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setModalityType(DEFAULT_MODALITY_TYPE);
+
+        // make text field
         text = new JTextField();
         GridBagConstraints c1 = new GridBagConstraints();
-        buildConstraints(c1, 0, 0, 4, 1, 0, 0);
+        c1.insets = new Insets(5, 5, 5, 5);
+        buildConstraints(c1, 0, 0, 4, 1);
         c1.fill = GridBagConstraints.BOTH;
         c1.anchor = GridBagConstraints.WEST;
         add(text, c1);
 
+        // make number button
         makeButton("1", 0, 1);
         makeButton("2", 1, 1);
         makeButton("3", 2, 1);
@@ -37,22 +41,29 @@ public class Keyboard extends JDialog {
         makeButton("9", 2, 3);
         makeButton("0", 1, 4);
 
+        // make cancel button
         JButton exit = new JButton("Cancel");
         exit.setBorder(BorderFactory.createEtchedBorder());
-        GridBagConstraints c5 = new GridBagConstraints();
+        GridBagConstraints c2 = new GridBagConstraints();
         exit.addActionListener(e -> dispose());
-        c5.fill = GridBagConstraints.HORIZONTAL;
-        buildConstraints(c5, 0, 4, 1, 1, 0, 0);
-        getContentPane().add(exit, c5);
+        c2.fill = GridBagConstraints.BOTH;
+        c2.insets = new Insets(5, 5, 5, 5);
+        buildConstraints(c2, 0, 4, 1, 1);
+        getContentPane().add(exit, c2);
 
+        // make ok button
         JButton ok = new JButton("OK");
         ok.setBorder(BorderFactory.createEtchedBorder());
         ok.addActionListener(e -> {
             value = text.getText();
             dispose();
         });
-        c5.gridx = 2;
-        getContentPane().add(ok, c5);
+        GridBagConstraints c3 = new GridBagConstraints();
+        c3.fill = GridBagConstraints.BOTH;
+        c3.insets = new Insets(5, 5, 5, 5);
+        buildConstraints(c3, 2, 4, 1, 1);
+        getContentPane().add(ok, c3);
+
         setVisible(true);
     }
 
@@ -60,19 +71,18 @@ public class Keyboard extends JDialog {
         JButton tmp = new JButton(number);
         tmp.setBorder(BorderFactory.createEtchedBorder());
         GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        buildConstraints(c, x, y, 1, 1, 10, 0);
+        c.fill = GridBagConstraints.BOTH;
+        c.insets = new Insets(5, 5, 5, 5);
+        buildConstraints(c, x, y, 1, 1);
         tmp.addActionListener(e -> text.setText(text.getText() + number));
         getContentPane().add(tmp, c);
     }
 
-    public static void buildConstraints(GridBagConstraints con, int gx, int gy, int gw, int gh, int wx, int wy) {
+    public static void buildConstraints(GridBagConstraints con, int gx, int gy, int gw, int wx) {
         con.gridx = gx;
         con.gridy = gy;
         con.gridwidth = gw;
-        con.gridheight = gh;
         con.weightx = wx;
-        con.weighty = wy;
     }
 
     public String getValue() {
