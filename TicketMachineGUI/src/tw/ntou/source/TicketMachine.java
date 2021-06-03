@@ -21,6 +21,7 @@ public class TicketMachine extends JFrame {
      * make main frame
      */
     public void makeFrame() {
+        // main frame initial
         frame = new JFrame("TicketMachine");
         frame.setSize(350, 300);
         frame.setLocationRelativeTo(null);

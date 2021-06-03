@@ -2,7 +2,6 @@ package tw.ntou.source;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
 
 /**
  * class for the process of buy button being pressed
@@ -19,16 +18,12 @@ public class BuyButton extends JFrame {
     private long price;
     // buy times
     private int times;
-    // file path initial
-    File path = new File("./out/");
+
 
     public BuyButton(Component frame, long balance, int times) {
         this.button = (JFrame) frame;
         this.balance = balance;
         this.times = times;
-        if (times == 0) {
-            initReceipt();
-        }
     }
 
     /**
@@ -38,10 +33,13 @@ public class BuyButton extends JFrame {
      */
     public long process() {
         button.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        // ticket cost option
         Object[] possibleValues = {"150", "90"};
         ticketCost = JOptionPane.showInputDialog(button, "Which Price", "Price",
                 JOptionPane.INFORMATION_MESSAGE, null, possibleValues, possibleValues[0]);
+        // process ticket machine procedure
         machineProcess(Integer.parseInt(ticketCost.toString()));
+        // continue option
         Object[] options = {"Yes", "No"};
         int result = JOptionPane.showOptionDialog(button, "Continue to buy?", "Warning",
                 JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
@@ -103,8 +101,8 @@ public class BuyButton extends JFrame {
     }
 
     /**
-     * Receive an amount of money in cents from a customer. Check that the amount is
-     * sensible.
+     * Receive an amount of money in cents from a customer with virtual number keyboard.
+     * Check that the amount is sensible.
      */
     public void insertMoney() {
         JOptionPane.showMessageDialog(button, "Please insert Money");
@@ -128,40 +126,10 @@ public class BuyButton extends JFrame {
         JOptionPane.showMessageDialog(button,
                 "##################\n" + "# The BlueJ Line\n" + "# Ticket\n"
                         + "# " + price + " cents.\n" + "# Amount\n" + "# " + ticketValue + "\n##################");
-        // Update the total collected with the price.
         // Reduce the balance by the price.
         balance = balance - price;
-        printReceipt();
-    }
-
-    /**
-     * create csv file for detail
-     */
-    public void initReceipt() {
-        try {
-            FileWriter writer = new FileWriter(path + "/receipt.csv");
-            writer.write("Times,Price,Amount,Total,Balance\n");
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * write csv file for detail
-     */
-    public void printReceipt() {
-        try {
-            FileWriter writer = new FileWriter(path + "/receipt.csv", true);
-            writer.write((times + 1) + ",");
-            writer.write(ticketCost.toString() + ",");
-            writer.write(ticketValue + ",");
-            writer.write(price + ",");
-            writer.write(balance + "\n");
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // print receipt
+        new FileOperation(ticketCost.toString(), ticketValue, balance, price, times);
     }
 
     /**

@@ -16,6 +16,7 @@ public class Keyboard extends JDialog {
     }
 
     public void makeFrame() {
+        // JDialog initial
         setTitle("Keyboard");
         setSize(300, 250);
         setLayout(new GridBagLayout());
