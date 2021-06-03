@@ -42,7 +42,7 @@ public class FileOperation {
         try {
             String path = getProgramPath();
             FileWriter writer = new FileWriter(path + "/receipt.csv");
-            writer.write("Times,Price,Amount,Total,Balance\n");
+            writer.write("Times,Price,Amount,Total,Insert,Balance\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -60,6 +60,7 @@ public class FileOperation {
             writer.write(ticketCost + ",");
             writer.write(ticketValue + ",");
             writer.write(price + ",");
+            writer.write(price + balance + ",");
             writer.write(balance + "\n");
             writer.close();
         } catch (IOException e) {
